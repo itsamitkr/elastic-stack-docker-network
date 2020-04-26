@@ -1,0 +1,18 @@
+{
+  "name": "elasticsearch-docker-container",
+  "version": "0.0.1",
+  "description": "Containerising Elasticsearch service, Kibana, and Python Elastic Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ElasticSearch",
+    "ELK",
+    "Kibana",
+    "Python3",
+    "Docker"
+  ],
+  "author": "Amit Kumar <Singhakumar.18@gmail.com>",
+  "license": "MIT"
+}

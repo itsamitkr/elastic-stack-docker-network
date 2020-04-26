@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <title>API Docs</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1 class="display-3"><strong>ETL API Docs</strong></h1>
+            <div class="alert alert-success" role="alert">
+                <button class="btn btn-xs btn-success">POST</button>&nbsp;&nbsp;
+                <strong>/api/v1/index/{index_name}</strong>&nbsp;&nbsp; Creates an index
+            </div>
+            <div>
+                <h3>Request</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>index_name</td>
+                        <td>path parameter</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3>Response</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Response Code</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>201</td>
+                            <td>Created</td>
+                        </tr>
+                        <tr>
+                            <td>400</td>
+                            <td>Bad Request</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-primary" role="alert">
+                <button class="btn btn-xs btn-primary">GET</button>&nbsp;&nbsp;
+                <strong>/api/v1/index/{index_name}</strong>&nbsp;&nbsp; Provides index details
+            </div>
+            <div>
+                <h3>Request</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>index_name</td>
+                        <td>path parameter</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3>Response</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Response Code</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>200</td>
+                        <td>Success</td>
+                    </tr>
+                    <tr>
+                        <td>204</td>
+                        <td>No Content</td>
+                    </tr>
+                    <tr>
+                        <td>500</td>
+                        <td>Internal Server Error</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <button class="btn btn-xs btn-warning">PUT</button>&nbsp;&nbsp;
+                <strong>/api/v1/index/{index_name}/upload</strong>&nbsp;&nbsp; Uploads data to an index
+            </div>
+            <div>
+                <h3>Request</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Note</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>index_name</td>
+                        <td>path parameter</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>body</td>
+                        <td>
+                            <code>{"id": "1"}</code>
+                            &nbsp;&nbsp;OR&nbsp;&nbsp;
+                            <code>[{"id": "1"}, {"id": "2"}]</code>
+                        </td>
+                        <td>All the objects must have an <code>id</code> key</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3>Response</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Response Code</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>200</td>
+                        <td>Success</td>
+                    </tr>
+                    <tr>
+                        <td>400</td>
+                        <td>Bad Request</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
