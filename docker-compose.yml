@@ -1,23 +1,23 @@
 version: '3'
 services:
-  elk-api:
+  flask-etl-api:
     build: ./src
     volumes:
       - api-data:/usr/src/app/static
     ports:
       - "5000:5000"
     environment:
-      ELASTICSEARCH_URL: http://elastic-search-service:9200
-      ELASTICSEARCH_HOSTS: http://elastic-search-service:9200
+      ELASTICSEARCH_URL: http://elasticsearch-service:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch-service:9200
     networks:
       - elastic
-  elastic-search-service:
+  elasticsearch-service:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
-    container_name: elastic-search-service
+    container_name: elasticsearch-service
     environment:
-      - node.name=elastic-search-service
+      - node.name=elasticsearch-service
       - cluster.name=es-docker-cluster
-      - cluster.initial_master_nodes=elastic-search-service
+      - cluster.initial_master_nodes=elasticsearch-service
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
     ulimits:
@@ -36,8 +36,26 @@ services:
     ports:
       - 5601:5601
     environment:
-      ELASTICSEARCH_URL: http://elastic-search-service:9200
-      ELASTICSEARCH_HOSTS: http://elastic-search-service:9200
+      ELASTICSEARCH_URL: http://elasticsearch-service:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch-service:9200
+    networks:
+      - elastic
+  nginx:
+    build: ./nginx
+    volumes:
+      - api-data:/usr/src/app/static
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+    restart: always
+    environment:
+      FLASK_ETL_URL: http://flask-etl-api:5000
+      FLASK_ETL_HOSTS: http://flask-etl-api:5000
+      ELASTICSEARCH_URL: http://elasticsearch-service:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch-service:9200
+      KIBANA_URL: http://kibana:5601
+      KIBANA_HOSTS: http://kibana:5601
     networks:
       - elastic
 
