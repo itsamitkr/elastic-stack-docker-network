@@ -1,6 +1,6 @@
 {
   "name": "elasticsearch-docker-container",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Containerising Elasticsearch service, Kibana, and Python Elastic Client",
   "main": "index.js",
   "scripts": {
