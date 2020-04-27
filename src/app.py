@@ -17,22 +17,33 @@ def about_view():
     return render_template("api-docs.html")
 
 
-@app.route('/api/v1/index/<index_name>', methods=["GET", "POST"])
-def index(index_name):
-    print(index_name)
+@app.route('/api/v1/index/<index_name>', defaults={"timestamp": None}, methods=["GET", "POST"])
+@app.route('/api/v1/index/<index_name>/<timestamp>', methods=["GET", "POST"])
+def index(index_name, timestamp):
     try:
         if request.method == "GET":
             if ElasticClient.index_exists(index_name):
-                return "Index Exists", 200
+                return "Index: {} Exists".format(index_name), 200
             else:
-                return "Index not found", 204
+                return "Index: {} not found".format(index_name), 204
+        elif request.method == "POST":
+            try:
+                ElasticClient.create_index(index_name, timestamp)
+                return "Index: {} created".format(index_name), 201
+            except Exception as ex:
+                raise ex
     except Exception as e:
         return str(e), 400
 
 
-@app.route('/api/v1/index/{index_name}/upload', methods=["PUT"])
-def upload():
-    return render_template("api-docs.html")
+@app.route('/api/v1/index/<index_name>/upload', methods=["PUT"])
+def upload(index_name):
+    try:
+        post_data = request.get_json()
+        ElasticClient.post_to_es(index_name, post_data)
+        return "Documents created", 201
+    except Exception as e:
+        return str(e), 400
 
 
 class ElasticClient:
@@ -44,7 +55,6 @@ class ElasticClient:
         resource_url = "{}/{}".format(ElasticClient.URL, index_pattern)
         response = requests.head(resource_url)
         try:
-
             return False if response.status_code == 404 else True
         except Exception as e:
             raise e
@@ -54,6 +64,7 @@ class ElasticClient:
         resource_url = "{}/{}".format(ElasticClient.URL, index_pattern)
         headers = {"Content-Type": "application/json"}
         config = {"settings": {"number_of_shards": "1", "number_of_replicas": "1"}}
+
         if time_series:
             config["mappings"] = {"properties": {"{}".format(time_series): {"type": "date"}}}
 

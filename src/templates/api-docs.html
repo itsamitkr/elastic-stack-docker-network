@@ -16,7 +16,7 @@
             <h1 class="display-3"><strong>ETL API Docs</strong></h1>
             <div class="alert alert-success" role="alert">
                 <button class="btn btn-xs btn-success">POST</button>&nbsp;&nbsp;
-                <strong>/api/v1/index/{index_name}</strong>&nbsp;&nbsp; Creates an index
+                <strong>/api/v1/index/{index_name}/{time_series}</strong>&nbsp;&nbsp; Creates an index
             </div>
             <div>
                 <h3>Request</h3>
@@ -25,12 +25,19 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Required</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>index_name</td>
-                        <td>path parameter</td>
+                        <td>Name of the index</td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td>time_series</td>
+                        <td>Timestamp field name</td>
+                        <td>False</td>
                     </tr>
                     </tbody>
                 </table>
