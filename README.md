@@ -48,5 +48,4 @@ docker exec -it container_id /bin/bash
 
 ## References
 * [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
-
-*[Install NGINX](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
+* [Install NGINX](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
